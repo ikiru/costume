@@ -5,7 +5,11 @@ This is where we will start to work on our costume inventory project
 
 ### QR code:
     Django:
-    - <https://github.com/pablorecio/django-qrcode>
+    - [django-qrcode](https://github.com/pablorecio/django-qrcode)
     
     React:
-    - <https://github.com/moaazsidat/react-native-qrcode-scanner>
+    A React component to generate QR codes.
+    - [qrcode.react] (https://github.com/zpao/qrcode.react)
+
+    React Native:
+    - [react-native-qrcode-scanner](https://github.com/moaazsidat/react-native-qrcode-scanner)
