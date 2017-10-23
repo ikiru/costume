@@ -16,4 +16,6 @@ This is where we will start to work on our costume inventory project
     
 ## Camera
    React: 
-   -[react-camera](https://www.npmjs.com/package/react-camera)
+   - [react-camera](https://www.npmjs.com/package/react-camera)
+   
+   - [Capturing-Pictures-in-React-Native](https://snowball.digital/Blog/Capturing-Pictures-in-React-Native)
