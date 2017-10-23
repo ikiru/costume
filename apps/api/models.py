@@ -74,7 +74,6 @@ class Organization(models.Model):
     name = models.Charfield(max_length=104)
     address = models.Charfield(max_length=104)
     zipcode = models.Charfield(max_length=10)
-    state = models.ForeignKey(State, related_name="clients")
     phone = models.Charfield(max_length=12)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -84,7 +83,24 @@ class Organization(models.Model):
 
 class Renter(Organization):
     tax_id = models.Charfield(max_length=45)
-    is_school = models.BooleanField(default=False) #Easily see which renters are schools
+    state = models.ForeignKey(State, related_name="renters")
+
+class Owner(Organization):
+    state = models.ForeignKey(State, related_name="owners")
+    customers = models.ManyToManyField(Renter, through="Event")
+
+class Event(models.Model):
+    name = models.CharField(max_length=45)
+    event_date = models.DateTimeField(null=True) #Needs to be able to accomadate multiple dates
+    one_week_price = models.CharField(max_length=45)
+    two_week_price = models.CharField(max_length=45)
+    other_week_price = models.CharField(max_length=45)
+    purchases = models.CharField(max_length=45)# Not sure if we need all these fields
+    subtotal = models.CharField(max_length=45)# but including anyway just in case
+    tax = models.CharField(max_length=45)# This one too
+    total_price = models.CharField(max_length=45)
+    customer = ForeignKey(Renter)
+    owner = ForeignKey(Owner)
 
 
 #Pertains to Costume
@@ -105,9 +121,9 @@ class SecondaryColor(Color):
 
 
 class Costume(models.Model):
-    image_1 = SlugField(max_length=100)
-    image_2 = SlugField(max_length=100)
-    image_3 = SlugField(max_length=100)
+    image_1 = SlugField(max_length=500)
+    image_2 = SlugField(max_length=500)
+    image_3 = SlugField(max_length=500)
     qr_code = TextField()
     description = models.TextField()
     primary_color = models.ForeignKey(PrimaryColor, related_name="costumes")
@@ -127,20 +143,13 @@ class TimePeriod(models.Model):
 
 #Pertains to Costume
 class Size(models.Model):
-    xxsmall = models.BooleanField(default=False)
-    xsmall = models.BooleanField(default=False)
-    small = models.BooleanField(default=False)
-    medium = models.BooleanField(default=False)
-    large = models.BooleanField(default=False)
-    xlarge = models.BooleanField(default=False)
-    xxlarge = models.BooleanField(default=False)
-    xxxlarge = models.BooleanField(default=False)
-    xxxxlarge = models.BooleanField(default=False)
+    size = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 #Pertains to Costume
 class Shows(models.Model):
+    name = models.CharField(max_length=100)
     costumes = models.ManyToManyField(Costume, related_name="shows")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
