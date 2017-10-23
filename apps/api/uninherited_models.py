@@ -70,39 +70,46 @@ class State(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class Organization(models.Model):
+class Client(models.Model):
     name = models.Charfield(max_length=104)
     address = models.Charfield(max_length=104)
     zipcode = models.Charfield(max_length=10)
     state = models.ForeignKey(State, related_name="clients")
     phone = models.Charfield(max_length=12)
+    tax_id = models.Charfield(max_length=45)
+    is_renter = models.BooleanField(default=False) #Easily see renters of costumes
+    is_owner = models.BooleanField(default=False) #Easily see owners of costumes
+    is_school = models.BooleanField(default=False) #Easily see which clients are schools
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        abstract = True
-
-class Renter(Organization):
-    tax_id = models.Charfield(max_length=45)
-    is_school = models.BooleanField(default=False) #Easily see which renters are schools
-
+    def __str__(self):
+        string_output = " ID: {} Name: {} Address: {} Phone: {} Renter: {} Owner: {}"
+        return string_output.format(
+        self.id,
+        self.name,
+        self.address,
+        self.phone,
+        self.is_renter,
+        self.is_owner,
+        )
 
 #Pertains to Costume
 #https://docs.djangoproject.com/en/1.11/topics/db/models/ Multi-table Inheritance
 class Color(models.Model):
     color = CharField(max_length=45)
+
+#Pertains to Costume
+#Inherits from Color
+class PrimaryColor(Color):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 #Pertains to Costume
 #Inherits from Color
-class PrimaryColor(Color):
-
-
-#Pertains to Costume
-#Inherits from Color
 class SecondaryColor(Color):
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class Costume(models.Model):
     image_1 = SlugField(max_length=100)
