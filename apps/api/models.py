@@ -82,8 +82,8 @@ class Organization(models.Model):
         abstract = True
 
 class Renter(Organization):
-    tax_id = models.Charfield(max_length=45)
     state = models.ForeignKey(State, related_name="renters")
+    tax_id = models.Charfield(max_length=45)
 
 class Owner(Organization):
     state = models.ForeignKey(State, related_name="owners")
@@ -101,6 +101,8 @@ class Event(models.Model):
     total_price = models.CharField(max_length=45)
     customer = ForeignKey(Renter)
     owner = ForeignKey(Owner)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 #Pertains to Costume
@@ -135,15 +137,15 @@ class Costume(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 #Pertains to Costume
-#Waiting on list from Jeff
 class TimePeriod(models.Model):
+    name = models.CharField(max_length=75)
     costume = models.OneToOneField(Costume, related_name="time_period")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 #Pertains to Costume
 class Size(models.Model):
-    size = models.BooleanField(default=False)
+    size = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
