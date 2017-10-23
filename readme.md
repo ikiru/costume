@@ -9,3 +9,8 @@ This is where we will start to work on our costume inventory project
     
     React:
     - <https://github.com/moaazsidat/react-native-qrcode-scanner>
+    
+## Camera
+
+    React: 
+    -https://www.npmjs.com/package/react-camera
