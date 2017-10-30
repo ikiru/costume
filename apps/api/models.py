@@ -149,7 +149,7 @@ class Size(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 #Pertains to Costume
-class Shows(models.Model):
+class Show(models.Model):
     name = models.CharField(max_length=100)
     costumes = models.ManyToManyField(Costume, related_name="shows")
     created_at = models.DateTimeField(auto_now_add=True)
