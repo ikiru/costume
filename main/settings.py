@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'apps.api',
     'rest_framework',
     # 'apps.core', Just in case we decide to use a core app
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

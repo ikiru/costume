@@ -92,6 +92,8 @@ class Owner(Organization):
 class Event(models.Model):
     name = models.CharField(max_length=45)
     event_date = models.DateTimeField(null=True) #Needs to be able to accomadate multiple dates
+    pickup_date = models.DateTimeField(null=True)
+    return_date = models.DateTimeField(null=True)
     one_week_price = models.CharField(max_length=45)
     two_week_price = models.CharField(max_length=45)
     other_week_price = models.CharField(max_length=45)
@@ -104,23 +106,19 @@ class Event(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
 #Pertains to Costume
-#https://docs.djangoproject.com/en/1.11/topics/db/models/ Multi-table Inheritance
-class Color(models.Model):
+#Inherits from Color
+class PrimaryColor(Color):
     color = CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 #Pertains to Costume
 #Inherits from Color
-class PrimaryColor(Color):
-
-
-#Pertains to Costume
-#Inherits from Color
 class SecondaryColor(Color):
-
+    color = CharField(max_length=45)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class Costume(models.Model):
     image_1 = SlugField(max_length=500)
@@ -133,6 +131,7 @@ class Costume(models.Model):
     owner = models.ForeignKey(Client, related_name="costumes")
     renter = models.ForeignKey(Client, related_name="costumes")
     in_stock = models.BooleanField(default=True)
+    on_exchange = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
