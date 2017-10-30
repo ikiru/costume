@@ -11,6 +11,10 @@ from rest_framework_simplejwt.views import (
 schema_view = get_schema_view(title='Construction API')
 
 router = DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'states', views.StateViewSet)
+router.register(r'organizations', views.OrganizationsViewSet)
+#Finish router urls
 
 #Login URLs for browsable API
 urlpatterns = [
