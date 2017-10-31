@@ -107,16 +107,26 @@ class Event(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 #Pertains to Costume
-#Inherits from Color
-class PrimaryColor(Color):
+class PrimaryColor(models.Model):
     color = CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 #Pertains to Costume
-#Inherits from Color
-class SecondaryColor(Color):
+class SecondaryColor(models.Model):
     color = CharField(max_length=45)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+#Pertains to Costume
+class TimePeriod(models.Model):
+    name = models.CharField(max_length=75)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+#Pertains to Costume
+class Size(models.Model):
+    size = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -128,24 +138,11 @@ class Costume(models.Model):
     description = models.TextField()
     primary_color = models.ForeignKey(PrimaryColor, related_name="costumes", on_delete=models.CASCADE)
     secondary_colors = models.ManyToManyField(SecondaryColor, related_name="costumes")
-    owner = models.ForeignKey(Client, related_name="costumes", on_delete=models.CASCADE)
-    renter = models.ForeignKey(Client, related_name="costumes", on_delete=models.CASCADE)
+    owner = models.ForeignKey(Owner, related_name="costumes", on_delete=models.CASCADE)
+    renter = models.ForeignKey(Renter, related_name="costumes", on_delete=models.CASCADE)
     timePeriod = models.ForeignKey(TimePeriod, related_name="costumes", on_delete=models.CASCADE)
     in_stock = models.BooleanField(default=True)
     on_exchange = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-#Pertains to Costume
-class TimePeriod(models.Model):
-    name = models.CharField(max_length=75)
-    # costume = models.OneToOneField(Costume, related_name="time_period")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-#Pertains to Costume
-class Size(models.Model):
-    size = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
