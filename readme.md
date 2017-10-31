@@ -1,21 +1,21 @@
 This is where we will start to work on our costume inventory project
 
 
-## Resource:
+# Resource:
 
 ### QR code:
-    Django:
-    - [django-qrcode](https://github.com/pablorecio/django-qrcode)
+   Django:
+   - [django-qrcode](https://github.com/pablorecio/django-qrcode)
     
-    React:
-    A React component to generate QR codes.
-    - [qrcode.react] (https://github.com/zpao/qrcode.react)
+   React:
+   - [qrcode.react](https://github.com/zpao/qrcode.react) A React component to generate QR codes.
 
-    React Native:
-    - [react-native-qrcode-scanner](https://github.com/moaazsidat/react-native-qrcode-scanner)
-    - <https://github.com/moaazsidat/react-native-qrcode-scanner>
+   React Native:
+   - [react-native-qrcode-scanner](https://github.com/moaazsidat/react-native-qrcode-scanner)
+    
     
 ## Camera
-
-    React: 
-    -https://www.npmjs.com/package/react-camera
+   React: 
+   - [react-camera](https://www.npmjs.com/package/react-camera)
+   
+   - [Capturing-Pictures-in-React-Native](https://snowball.digital/Blog/Capturing-Pictures-in-React-Native)
