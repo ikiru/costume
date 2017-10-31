@@ -56,12 +56,11 @@ class User(AbstractBaseUser):
         return self.first_name
 
     def __str__(self):
-        string_output = " ID: {} Email: {} Password: {} Active: {} Admin: {}"
+        string_output = " ID: {} Email: {} Password: {} Admin: {}"
         return string_output.format(
         self.id,
         self.email,
         self.password,
-        self.is_active,
         self.is_admin,
         )
 
@@ -82,11 +81,11 @@ class Organization(models.Model):
         abstract = True
 
 class Renter(Organization):
-    state = models.ForeignKey(State, related_name="renters")
+    state = models.ForeignKey(State, related_name="renters", on_delete=models.CASCADE)
     tax_id = models.Charfield(max_length=45)
 
 class Owner(Organization):
-    state = models.ForeignKey(State, related_name="owners")
+    state = models.ForeignKey(State, related_name="owners", on_delete=models.CASCADE)
     customers = models.ManyToManyField(Renter, through="Event")
 
 class Event(models.Model):
