@@ -101,8 +101,8 @@ class Event(models.Model):
     subtotal = models.CharField(max_length=45)# but including anyway just in case
     tax = models.CharField(max_length=45)# This one too
     total_price = models.CharField(max_length=45)
-    customer = ForeignKey(Renter)
-    owner = ForeignKey(Owner)
+    customer = ForeignKey(Renter, on_delete=models.CASCADE)
+    owner = ForeignKey(Owner, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -126,10 +126,11 @@ class Costume(models.Model):
     image_3 = SlugField(max_length=500)
     qr_code = TextField()
     description = models.TextField()
-    primary_color = models.ForeignKey(PrimaryColor, related_name="costumes")
+    primary_color = models.ForeignKey(PrimaryColor, related_name="costumes", on_delete=models.CASCADE)
     secondary_colors = models.ManyToManyField(SecondaryColor, related_name="costumes")
-    owner = models.ForeignKey(Client, related_name="costumes")
-    renter = models.ForeignKey(Client, related_name="costumes")
+    owner = models.ForeignKey(Client, related_name="costumes", on_delete=models.CASCADE)
+    renter = models.ForeignKey(Client, related_name="costumes", on_delete=models.CASCADE)
+    timePeriod = models.ForeignKey(TimePeriod, related_name="costumes", on_delete=models.CASCADE)
     in_stock = models.BooleanField(default=True)
     on_exchange = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -138,7 +139,7 @@ class Costume(models.Model):
 #Pertains to Costume
 class TimePeriod(models.Model):
     name = models.CharField(max_length=75)
-    costume = models.OneToOneField(Costume, related_name="time_period")
+    # costume = models.OneToOneField(Costume, related_name="time_period")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

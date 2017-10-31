@@ -14,7 +14,15 @@ router = DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'states', views.StateViewSet)
 router.register(r'organizations', views.OrganizationsViewSet)
-#Finish router urls
+router.register(r'renters', views.RentersViewSet)
+router.register(r'owners', views.OwnersViewSet)
+router.register(r'events', views.EventsViewSet)
+router.register(r'primarycolors', views.PrimaryColorsViewSet)
+router.register(r'secondarycolors', views.SecondaryColorsViewSet)
+router.register(r'costumes', views.CostumesViewSet)
+router.register(r'timeperiods', views.TimePeriodsViewSet)
+router.register(r'sizes', views.SizesViewSet)
+router.register(r'shows', views.ShowsViewSet)
 
 #Login URLs for browsable API
 urlpatterns = [
