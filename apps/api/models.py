@@ -90,18 +90,23 @@ class Owner(Organization):
 
 class Event(models.Model):
     name = models.CharField(max_length=45)
-    event_date = models.DateTimeField(null=True) #Needs to be able to accomadate multiple dates
-    check_in = models.DateTimeField(null=True)
-    check_out = models.DateTimeField(null=True)
+
+    check_in = models.DateField(null=True)
+    check_out = models.DateField(null=True)
+    event_date = models.DateField(null=True) #Needs to be able to accomadate multiple dates
+
     one_week_price = models.CharField(max_length=45)
     two_week_price = models.CharField(max_length=45)
     other_week_price = models.CharField(max_length=45)
+
     purchases = models.CharField(max_length=45)# Not sure if we need all these fields
     subtotal = models.CharField(max_length=45)# but including anyway just in case
     tax = models.CharField(max_length=45)# This one too
     total_price = models.CharField(max_length=45)
+
     customer = ForeignKey(Renter, on_delete=models.CASCADE)
     owner = ForeignKey(Owner, on_delete=models.CASCADE)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -130,18 +135,23 @@ class Size(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class Costume(models.Model):
-    image_1 = SlugField(max_length=500)
-    image_2 = SlugField(max_length=500)
-    image_3 = SlugField(max_length=500)
-    qr_code = TextField()
+    image_1 = models.SlugField(max_length=500)
+    image_2 = models.SlugField(max_length=500)
+    image_3 = models.SlugField(max_length=500)
+
+    qr_code = models.TextField()
     description = models.TextField()
+
     primary_color = models.ForeignKey(PrimaryColor, related_name="costumes", on_delete=models.CASCADE)
-    secondary_colors = models.ManyToManyField(SecondaryColor, related_name="costumes")
+    secondary_color = models.ForeignKey(SecondaryColor, related_name="costumes", on_delete=models.CASCADE)
+
     owner = models.ForeignKey(Owner, related_name="costumes", on_delete=models.CASCADE)
     renter = models.ForeignKey(Renter, related_name="costumes", on_delete=models.CASCADE)
     timePeriod = models.ForeignKey(TimePeriod, related_name="costumes", on_delete=models.CASCADE)
+
     in_stock = models.BooleanField(default=True)
     on_exchange = models.BooleanField(default=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
