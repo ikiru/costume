@@ -91,8 +91,8 @@ class Owner(Organization):
 class Event(models.Model):
     name = models.CharField(max_length=45)
     event_date = models.DateTimeField(null=True) #Needs to be able to accomadate multiple dates
-    pickup_date = models.DateTimeField(null=True)
-    return_date = models.DateTimeField(null=True)
+    check_in = models.DateTimeField(null=True)
+    check_out = models.DateTimeField(null=True)
     one_week_price = models.CharField(max_length=45)
     two_week_price = models.CharField(max_length=45)
     other_week_price = models.CharField(max_length=45)
