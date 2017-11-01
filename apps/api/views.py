@@ -16,13 +16,6 @@ class StateViewSet(viewsets.ModelViewSet):
     queryset = State.objects.all()
     serializer_class = StateSerializer
 
-    class OrganizationViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows checklists to be viewed or edited
-    """
-    queryset = Organization.objects.all()
-    serializer_class = OrganizationSerializer
-
 class RenterViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows sections to be viewed or edited
@@ -37,12 +30,12 @@ class OwnerViewSet(viewsets.ModelViewSet):
     queryset = Owner.objects.all()
     serializer_class = OwnerSerializer
 
-class EventViewSet(viewsets.ModelViewSet):
+class InvoiceViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows checks to be viewed or edited
     """
-    queryset = Event.objects.all()
-    serializer_class = EventSerializer
+    queryset = Invoice.objects.all()
+    serializer_class = InvoiceSerializer
 
 class PrimaryColorViewSet(viewsets.ModelViewSet):
     """

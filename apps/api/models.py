@@ -69,26 +69,28 @@ class State(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class Organization(models.Model):
+class Renter(models.Model):
     name = models.Charfield(max_length=104)
     address = models.Charfield(max_length=104)
     zipcode = models.Charfield(max_length=10)
     phone = models.Charfield(max_length=12)
+    tax_id = models.Charfield(max_length=45)
+    state = models.ForeignKey(State, related_name="renters", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        abstract = True
-
-class Renter(Organization):
-    state = models.ForeignKey(State, related_name="renters", on_delete=models.CASCADE)
-    tax_id = models.Charfield(max_length=45)
-
-class Owner(Organization):
+class Owner(models.Model):
+    name = models.Charfield(max_length=104)
+    address = models.Charfield(max_length=104)
+    zipcode = models.Charfield(max_length=10)
+    phone = models.Charfield(max_length=12)
     state = models.ForeignKey(State, related_name="owners", on_delete=models.CASCADE)
-    customers = models.ManyToManyField(Renter, through="Event")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    #Do we need to keep this relationship? Or just use a join?
+    renters = models.ManyToManyField(Renter, related_name="owners", through="Invoice")
 
-class Event(models.Model):
+class Invoice(models.Model):
     name = models.CharField(max_length=45)
 
     check_in = models.DateField(null=True)
@@ -104,8 +106,8 @@ class Event(models.Model):
     tax = models.CharField(max_length=45)# This one too
     total_price = models.CharField(max_length=45)
 
-    customer = ForeignKey(Renter, on_delete=models.CASCADE)
-    owner = ForeignKey(Owner, on_delete=models.CASCADE)
+    customer = ForeignKey(Renter, related_name="invoices", on_delete=models.CASCADE)
+    owner = ForeignKey(Owner, related_name="invoices", on_delete=models.CASCADE)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
