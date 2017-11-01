@@ -56,12 +56,11 @@ class User(AbstractBaseUser):
         return self.first_name
 
     def __str__(self):
-        string_output = " ID: {} Email: {} Password: {} Active: {} Admin: {}"
+        string_output = " ID: {} Email: {} Password: {} Admin: {}"
         return string_output.format(
         self.id,
         self.email,
         self.password,
-        self.is_active,
         self.is_admin,
         )
 
@@ -82,16 +81,18 @@ class Organization(models.Model):
         abstract = True
 
 class Renter(Organization):
-    state = models.ForeignKey(State, related_name="renters")
+    state = models.ForeignKey(State, related_name="renters", on_delete=models.CASCADE)
     tax_id = models.Charfield(max_length=45)
 
 class Owner(Organization):
-    state = models.ForeignKey(State, related_name="owners")
+    state = models.ForeignKey(State, related_name="owners", on_delete=models.CASCADE)
     customers = models.ManyToManyField(Renter, through="Event")
 
 class Event(models.Model):
     name = models.CharField(max_length=45)
     event_date = models.DateTimeField(null=True) #Needs to be able to accomadate multiple dates
+    check_in = models.DateTimeField(null=True)
+    check_out = models.DateTimeField(null=True)
     one_week_price = models.CharField(max_length=45)
     two_week_price = models.CharField(max_length=45)
     other_week_price = models.CharField(max_length=45)
@@ -99,47 +100,26 @@ class Event(models.Model):
     subtotal = models.CharField(max_length=45)# but including anyway just in case
     tax = models.CharField(max_length=45)# This one too
     total_price = models.CharField(max_length=45)
-    customer = ForeignKey(Renter)
-    owner = ForeignKey(Owner)
+    customer = ForeignKey(Renter, on_delete=models.CASCADE)
+    owner = ForeignKey(Owner, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
 #Pertains to Costume
-#https://docs.djangoproject.com/en/1.11/topics/db/models/ Multi-table Inheritance
-class Color(models.Model):
+class PrimaryColor(models.Model):
     color = CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 #Pertains to Costume
-#Inherits from Color
-class PrimaryColor(Color):
-
-
-#Pertains to Costume
-#Inherits from Color
-class SecondaryColor(Color):
-
-
-class Costume(models.Model):
-    image_1 = SlugField(max_length=500)
-    image_2 = SlugField(max_length=500)
-    image_3 = SlugField(max_length=500)
-    qr_code = TextField()
-    description = models.TextField()
-    primary_color = models.ForeignKey(PrimaryColor, related_name="costumes")
-    secondary_colors = models.ManyToManyField(SecondaryColor, related_name="costumes")
-    owner = models.ForeignKey(Client, related_name="costumes")
-    renter = models.ForeignKey(Client, related_name="costumes")
-    in_stock = models.BooleanField(default=True)
+class SecondaryColor(models.Model):
+    color = CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 #Pertains to Costume
 class TimePeriod(models.Model):
     name = models.CharField(max_length=75)
-    costume = models.OneToOneField(Costume, related_name="time_period")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -149,8 +129,24 @@ class Size(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+class Costume(models.Model):
+    image_1 = SlugField(max_length=500)
+    image_2 = SlugField(max_length=500)
+    image_3 = SlugField(max_length=500)
+    qr_code = TextField()
+    description = models.TextField()
+    primary_color = models.ForeignKey(PrimaryColor, related_name="costumes", on_delete=models.CASCADE)
+    secondary_colors = models.ManyToManyField(SecondaryColor, related_name="costumes")
+    owner = models.ForeignKey(Owner, related_name="costumes", on_delete=models.CASCADE)
+    renter = models.ForeignKey(Renter, related_name="costumes", on_delete=models.CASCADE)
+    timePeriod = models.ForeignKey(TimePeriod, related_name="costumes", on_delete=models.CASCADE)
+    in_stock = models.BooleanField(default=True)
+    on_exchange = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 #Pertains to Costume
-class Shows(models.Model):
+class Show(models.Model):
     name = models.CharField(max_length=100)
     costumes = models.ManyToManyField(Costume, related_name="shows")
     created_at = models.DateTimeField(auto_now_add=True)
