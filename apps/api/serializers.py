@@ -19,7 +19,7 @@ class StateSerializer(serializers.HyperlinkedModelSerializer):
 
 class RenterSerializer(serializers.HyperlinkedModelSerializer):
     costumes = serializers.HyperlinkedRelatedField(queryset=Costumes.objects.all(), view_name='costume-detail', many=True)
-	invoices = serializers.HyperlinkedRelatedField(queryset=Events.objects.all(), view_name='event-detail', many=True)
+	invoices = serializers.HyperlinkedRelatedField(queryset=Invoices.objects.all(), view_name='invoices-detail', many=True)
     #Delete owners field if MtM relationship in models is unneeded
     owners = serializers.HyperlinkedRelatedField(queryset=Owners.objects.all(), view_name='owner-detail', many=True)
 
@@ -29,7 +29,7 @@ class RenterSerializer(serializers.HyperlinkedModelSerializer):
 
 class OwnerSerializer(serializers.HyperlinkedModelSerializer):
     costumes = serializers.HyperlinkedRelatedField(queryset=Costumes.objects.all(), view_name='costume-detail', many=True)
-	invoices = serializers.HyperlinkedRelatedField(queryset=Events.objects.all(), view_name='event-detail', many=True)
+	invoices = serializers.HyperlinkedRelatedField(queryset=Invoices.objects.all(), view_name='invoices-detail', many=True)
 
     class Meta:
         model = Owner
