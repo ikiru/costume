@@ -181,14 +181,14 @@ class Show(models.Model):
         return self.name
 
 class Costume(models.Model):
-    image_1 = models.SlugField(max_length=500)
-    image_2 = models.SlugField(max_length=500)
-    image_3 = models.SlugField(max_length=500)
+    image_1 = models.CharField(max_length=500)
+    image_2 = models.CharField(max_length=500)
+    image_3 = models.CharField(max_length=500)
 
     qr_code = models.TextField()
     description = models.TextField()
 
-    size = models.ForeignKey(Size, related_name="costumes", on_delete=models.CASCADE)
+    size = models.ForeignKey(Size, related_name="costumes")
     primary_color = models.ForeignKey(PrimaryColor, related_name="costumes")
     secondary_color = models.ForeignKey(SecondaryColor, related_name="costumes")
 
