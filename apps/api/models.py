@@ -66,15 +66,15 @@ class User(AbstractBaseUser):
         )
 
 class State(models.Model):
-    name = models.Charfield(max_length=2)
+    name = models.CharField(max_length=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class Organization(models.Model):
-    name = models.Charfield(max_length=104)
-    address = models.Charfield(max_length=104)
-    zipcode = models.Charfield(max_length=10)
-    phone = models.Charfield(max_length=12)
+    name = models.CharField(max_length=104)
+    address = models.CharField(max_length=104)
+    zipcode = models.CharField(max_length=10)
+    phone = models.CharField(max_length=12)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -83,7 +83,7 @@ class Organization(models.Model):
 
 class Renter(Organization):
     state = models.ForeignKey(State, related_name="renters")
-    tax_id = models.Charfield(max_length=45)
+    tax_id = models.CharField(max_length=45)
 
 class Owner(Organization):
     state = models.ForeignKey(State, related_name="owners")
@@ -99,8 +99,8 @@ class Event(models.Model):
     subtotal = models.CharField(max_length=45)# but including anyway just in case
     tax = models.CharField(max_length=45)# This one too
     total_price = models.CharField(max_length=45)
-    customer = ForeignKey(Renter)
-    owner = ForeignKey(Owner)
+    customer = models.ForeignKey(Renter, related_name="Event")
+    owner = models.ForeignKey(Owner, related_name="Event")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -108,25 +108,26 @@ class Event(models.Model):
 #Pertains to Costume
 #https://docs.djangoproject.com/en/1.11/topics/db/models/ Multi-table Inheritance
 class Color(models.Model):
-    color = CharField(max_length=45)
+    color = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 #Pertains to Costume
 #Inherits from Color
 class PrimaryColor(Color):
-
+	pass
 
 #Pertains to Costume
 #Inherits from Color
 class SecondaryColor(Color):
+	pass
 
 
 class Costume(models.Model):
-    image_1 = SlugField(max_length=500)
-    image_2 = SlugField(max_length=500)
-    image_3 = SlugField(max_length=500)
-    qr_code = TextField()
+    image_1 = models.SlugField(max_length=500)
+    image_2 = models.SlugField(max_length=500)
+    image_3 = models.SlugField(max_length=500)
+    qr_code = models.TextField()
     description = models.TextField()
     primary_color = models.ForeignKey(PrimaryColor, related_name="costumes")
     secondary_colors = models.ManyToManyField(SecondaryColor, related_name="costumes")
