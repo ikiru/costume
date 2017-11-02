@@ -2,6 +2,9 @@ from __future__ import unicode_literals
 from rest_framework import permissions, viewsets
 from .serializers import *
 
+from django.contrib.auth import get_user_model #Required b/c custom User model
+User = get_user_model()#Required b/c custom User model
+
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited
@@ -15,13 +18,6 @@ class StateViewSet(viewsets.ModelViewSet):
     """
     queryset = State.objects.all()
     serializer_class = StateSerializer
-
-    class OrganizationViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows checklists to be viewed or edited
-    """
-    queryset = Organization.objects.all()
-    serializer_class = OrganizationSerializer
 
 class RenterViewSet(viewsets.ModelViewSet):
     """
@@ -37,12 +33,12 @@ class OwnerViewSet(viewsets.ModelViewSet):
     queryset = Owner.objects.all()
     serializer_class = OwnerSerializer
 
-class EventViewSet(viewsets.ModelViewSet):
+class InvoiceViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows checks to be viewed or edited
     """
-    queryset = Event.objects.all()
-    serializer_class = EventSerializer
+    queryset = Invoice.objects.all()
+    serializer_class = InvoiceSerializer
 
 class PrimaryColorViewSet(viewsets.ModelViewSet):
     """

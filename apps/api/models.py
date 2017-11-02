@@ -55,6 +55,21 @@ class User(AbstractBaseUser):
     def get_short_name(self):
         return self.first_name
 
+    #Does the user have a specific permission?
+    # Simplest possible answer: Yes, always
+    def has_perms(self, perm, obj=None):
+        return True
+
+    #Does the user have permissions to view the app `app_label`?
+    # Simplest possible answer: Yes, always
+    def has_module_perms(self, app_label):
+        return True
+
+    #Is the user a member of staff?
+    # Simplest possible answer: All admins are staff
+    def is_staff(self):
+        return self.is_admin
+
     def __str__(self):
         string_output = " ID: {} Email: {} Password: {} Admin: {}"
         return string_output.format(
@@ -65,57 +80,78 @@ class User(AbstractBaseUser):
         )
 
 class State(models.Model):
-    name = models.Charfield(max_length=2)
+    name = models.CharField(max_length=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class Organization(models.Model):
-    name = models.Charfield(max_length=104)
-    address = models.Charfield(max_length=104)
-    zipcode = models.Charfield(max_length=10)
-    phone = models.Charfield(max_length=12)
+    def __str__(self):
+        return self.name
+
+class Renter(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
+    city = models.CharField(max_length=100) #Seed with cities
+    zipcode = models.CharField(max_length=10) #Seed with available zips
+    phone = models.CharField(max_length=12)
+    tax_id = models.CharField(max_length=45)
+    state = models.ForeignKey(State, related_name="renters") #Seed with states
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        abstract = True
+    def __str__(self):
+        return self.name
 
-class Renter(Organization):
-    state = models.ForeignKey(State, related_name="renters", on_delete=models.CASCADE)
-    tax_id = models.Charfield(max_length=45)
+class Owner(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
+    city = models.CharField(max_length=100) #Seed with cities
+    zipcode = models.CharField(max_length=10) #Seed with zips
+    phone = models.CharField(max_length=12)
+    tax_id = models.CharField(max_length=45)
+    state = models.ForeignKey(State, related_name="owners") #Seed with states
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-class Owner(Organization):
-    state = models.ForeignKey(State, related_name="owners", on_delete=models.CASCADE)
-    customers = models.ManyToManyField(Renter, through="Event")
+    def __str__(self):
+        return self.name
 
-class Event(models.Model):
-    name = models.CharField(max_length=45)
-    event_date = models.DateTimeField(null=True) #Needs to be able to accomadate multiple dates
-    check_in = models.DateTimeField(null=True)
-    check_out = models.DateTimeField(null=True)
-    one_week_price = models.CharField(max_length=45)
-    two_week_price = models.CharField(max_length=45)
-    other_week_price = models.CharField(max_length=45)
-    purchases = models.CharField(max_length=45)# Not sure if we need all these fields
-    subtotal = models.CharField(max_length=45)# but including anyway just in case
-    tax = models.CharField(max_length=45)# This one too
-    total_price = models.CharField(max_length=45)
-    customer = ForeignKey(Renter, on_delete=models.CASCADE)
-    owner = ForeignKey(Owner, on_delete=models.CASCADE)
+class Invoice(models.Model):
+    check_out = models.DateField(null=True)
+    check_in = models.DateField(null=True)
+    event_date = models.DateField(null=True) #Needs to be able to accomadate multiple dates
+
+    one_week_price = models.DecimalField(max_digits=7, decimal_places=2)
+    two_week_price = models.DecimalField(max_digits=7, decimal_places=2)
+    other_week_price = models.DecimalField(max_digits=7, decimal_places=2)
+
+    purchases = models.DecimalField(max_digits=7, decimal_places=2)# Not sure if we need all these fields
+    subtotal = models.DecimalField(max_digits=8, decimal_places=2)# but including anyway just in case
+    tax = models.DecimalField(max_digits=10, decimal_places=6)# This one too
+    total_price = models.DecimalField(max_digits=8, decimal_places=2)
+
+    customer = models.ForeignKey(Renter, related_name="invoices")
+    owner = models.ForeignKey(Owner, related_name="invoices")
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 #Pertains to Costume
 class PrimaryColor(models.Model):
-    color = CharField(max_length=45)
+    color = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.color
+
 #Pertains to Costume
 class SecondaryColor(models.Model):
-    color = CharField(max_length=45)
+    color = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.color
 
 #Pertains to Costume
 class TimePeriod(models.Model):
@@ -123,31 +159,47 @@ class TimePeriod(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
 #Pertains to Costume
 class Size(models.Model):
     size = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class Costume(models.Model):
-    image_1 = SlugField(max_length=500)
-    image_2 = SlugField(max_length=500)
-    image_3 = SlugField(max_length=500)
-    qr_code = TextField()
-    description = models.TextField()
-    primary_color = models.ForeignKey(PrimaryColor, related_name="costumes", on_delete=models.CASCADE)
-    secondary_colors = models.ManyToManyField(SecondaryColor, related_name="costumes")
-    owner = models.ForeignKey(Owner, related_name="costumes", on_delete=models.CASCADE)
-    renter = models.ForeignKey(Renter, related_name="costumes", on_delete=models.CASCADE)
-    timePeriod = models.ForeignKey(TimePeriod, related_name="costumes", on_delete=models.CASCADE)
-    in_stock = models.BooleanField(default=True)
-    on_exchange = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.size
 
 #Pertains to Costume
 class Show(models.Model):
     name = models.CharField(max_length=100)
-    costumes = models.ManyToManyField(Costume, related_name="shows")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+class Costume(models.Model):
+    image_1 = models.CharField(max_length=500)
+    image_2 = models.CharField(max_length=500)
+    image_3 = models.CharField(max_length=500)
+
+    qr_code = models.TextField()
+    description = models.TextField()
+
+    size = models.ForeignKey(Size, related_name="costumes")
+    primary_color = models.ForeignKey(PrimaryColor, related_name="costumes")
+    secondary_color = models.ForeignKey(SecondaryColor, related_name="costumes")
+
+    owner = models.ForeignKey(Owner, related_name="costumes")
+    renter = models.ForeignKey(Renter, related_name="costumes")
+    timePeriod = models.ForeignKey(TimePeriod, related_name="costumes")
+
+    shows = models.ManyToManyField(Show, related_name="costumes")
+
+    in_stock = models.BooleanField(default=True)
+    on_exchange = models.BooleanField(default=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

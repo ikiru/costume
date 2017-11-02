@@ -1,0 +1,8 @@
+TO DO:
+Add a field to Invoice to hold a list of the articles being rented
+Create manager for Invoices, validate that check_in must be after check_out
+Also, that event date must be between check_in and check_out
+
+ON FRONT END
+
+Make sure that all of the rental/purchase fields default to 0
