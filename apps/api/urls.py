@@ -7,6 +7,8 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+# from rest_framework.authtoken import views as drf_views
+
 
 schema_view = get_schema_view(title='Construction API')
 
@@ -27,7 +29,15 @@ router.register(r'shows', views.ShowViewSet)
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    # url(r'^api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'), JWT URLs
-    # url(r'^api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh' ), JWT Urls
+	## enable authentication endpoints
+	# url(r'^auth$', drf_views.obtain_auth_token, name='auth'),
+	# url(r'^api/auth/token/obtain/$', TokenObtainPairView.as_view()),
+    # url(r'^api/auth/token/refresh/$', TokenRefreshView.as_view()),
+    url(r'^api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    url(r'^api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh' ),
     url(r'^schema/$', schema_view), # For api schema view
 ]
+
+
+## to get token from terminal 
+## curl -X POST -d "email=email&password=password" http://localhost:8000/api/token/
