@@ -28,7 +28,7 @@ router.register(r'shows', views.ShowViewSet)
 #Login URLs for browsable API
 urlpatterns = [
     url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 	## enable authentication endpoints
 	# url(r'^auth$', drf_views.obtain_auth_token, name='auth'),
 	# url(r'^api/auth/token/obtain/$', TokenObtainPairView.as_view()),
@@ -39,5 +39,5 @@ urlpatterns = [
 ]
 
 
-## to get token from terminal 
+## to get token from terminal
 ## curl -X POST -d "email=email&password=password" http://localhost:8000/api/token/

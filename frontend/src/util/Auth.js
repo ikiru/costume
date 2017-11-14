@@ -9,10 +9,10 @@ export function InvalidCredentialsException(message) {
     this.name = 'InvalidCredentialsException';
 }
 
-export function login(username, password) {
+export function login(email, password) {
   return axios
     .post(URL + LOGIN, {
-      username,
+      email,
       password
     })
     .then(function (response) {
