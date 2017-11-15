@@ -3,10 +3,8 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from . import views
 from rest_framework.schemas import get_schema_view
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
+from rest_framework_jwt.views import obtain_jwt_token
+
 # from rest_framework.authtoken import views as drf_views
 
 
@@ -28,13 +26,12 @@ router.register(r'shows', views.ShowViewSet)
 #Login URLs for browsable API
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^api-token-auth/', obtain_jwt_token),
     # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 	## enable authentication endpoints
 	# url(r'^auth$', drf_views.obtain_auth_token, name='auth'),
 	# url(r'^api/auth/token/obtain/$', TokenObtainPairView.as_view()),
     # url(r'^api/auth/token/refresh/$', TokenRefreshView.as_view()),
-    url(r'^api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    url(r'^api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh' ),
     url(r'^schema/$', schema_view), # For api schema view
 ]
 
