@@ -7,28 +7,37 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+# from rest_framework.authtoken import views as drf_views
+
 
 schema_view = get_schema_view(title='Construction API')
 
 router = DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'states', views.StateViewSet)
-router.register(r'organizations', views.OrganizationsViewSet)
-router.register(r'renters', views.RentersViewSet)
-router.register(r'owners', views.OwnersViewSet)
-router.register(r'events', views.EventsViewSet)
-router.register(r'primarycolors', views.PrimaryColorsViewSet)
-router.register(r'secondarycolors', views.SecondaryColorsViewSet)
-router.register(r'costumes', views.CostumesViewSet)
-router.register(r'timeperiods', views.TimePeriodsViewSet)
-router.register(r'sizes', views.SizesViewSet)
-router.register(r'shows', views.ShowsViewSet)
+router.register(r'renters', views.RenterViewSet)
+router.register(r'owners', views.OwnerViewSet)
+router.register(r'invoices', views.InvoiceViewSet)
+router.register(r'primarycolors', views.PrimaryColorViewSet)
+router.register(r'secondarycolors', views.SecondaryColorViewSet)
+router.register(r'costumes', views.CostumeViewSet)
+router.register(r'timeperiods', views.TimePeriodViewSet)
+router.register(r'sizes', views.SizeViewSet)
+router.register(r'shows', views.ShowViewSet)
 
 #Login URLs for browsable API
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    # url(r'^api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'), JWT URLs
-    # url(r'^api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh' ), JWT Urls
+	## enable authentication endpoints
+	# url(r'^auth$', drf_views.obtain_auth_token, name='auth'),
+	# url(r'^api/auth/token/obtain/$', TokenObtainPairView.as_view()),
+    # url(r'^api/auth/token/refresh/$', TokenRefreshView.as_view()),
+    url(r'^api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    url(r'^api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh' ),
     url(r'^schema/$', schema_view), # For api schema view
 ]
+
+
+## to get token from terminal 
+## curl -X POST -d "email=email&password=password" http://localhost:8000/api/token/

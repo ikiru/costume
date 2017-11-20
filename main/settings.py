@@ -42,7 +42,6 @@ INSTALLED_APPS = [
 
     'apps.api',
     'rest_framework',
-    # 'apps.core', Just in case we decide to use a core app
     'django_extensions',
 ]
 
@@ -61,6 +60,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
         # 'rest_framework.permissions.IsAuthenticated',
     ),
+    'PAGE_SIZE': 10,
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
     'rest_framework.authentication.BasicAuthentication',
