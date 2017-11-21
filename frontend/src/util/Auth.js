@@ -10,20 +10,30 @@ export function InvalidCredentialsException(message) {
 }
 
 export function login(email, password) {
+<<<<<<< HEAD
   return axios
     .post(URL + LOGIN, {
       email,
+=======
+  console.log(email);
+// If you have error: 
+// Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:3000' is therefore not allowed access.
+// To get to the localhost:8000, you have to install a plugin "Allow-Control-Allow-Origin" for Chrome
+  return axios.post(
+    URL + LOGIN,
+    { email,
+>>>>>>> upstream/master
       password
-    })
-    .then(function (response) {
-      store.dispatch(setToken(response.data.token));
+    }).then(function (response) {
+        console.log('success', response)
+        store.dispatch(setToken(response.data.access));
     })
     .catch(function (error) {
-      // raise different exception if due to invalid credentials
-      if (_.get(error, 'response.status') === 400) {
+        // raise different exception if due to invalid credentials
+        if (_.get(error, 'response.status') === 400) {
         throw new InvalidCredentialsException(error);
-      }
-      throw error;
+        }
+        throw error;
     });
 }
 
