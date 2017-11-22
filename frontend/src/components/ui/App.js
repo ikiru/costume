@@ -1,23 +1,43 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
-import Login from '../login/Login'
+import Login from '../login/Login';
+
+import { apiClient } from '../../util/ApiClient';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        {/* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header> */}
+    constructor(props){
+        super(props);
+        this.state={ 
+            schema: {}
+        };
+    }
+    getSchema(){
+       var instance = apiClient();
+       instance.get('/schema/')
+       .then((schema) => {
+           this.setState({ schema });
+       })
+       .catch((error) => {
+           console.log(error);
+       });
+    }
+    
+    componentWillMount() {
+        console.log('lol');
+    }
 
-        <Login/>
+    render() {
+        return (
+            <div className="App">
 
-      </div>
-      
-    );
-  }
+            <Login/>
+            <div>
+                <button onClick={(event) => this.getSchema(event)}>Click me</button>
+            </div>
+            </div>
+            
+        );
+    }
 }
 
 export default App;
