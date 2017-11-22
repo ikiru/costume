@@ -9,7 +9,7 @@ const store = createStore(
     applyMiddleware(
       createLogger(),
     ),
-    autoRehydrate()
+    // autoRehydrate()
   )
 );
 persistStore(store);
