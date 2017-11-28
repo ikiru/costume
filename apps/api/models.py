@@ -27,7 +27,7 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, password, first_name, last_name):
         user = self.create_user(email, password, first_name, last_name)
         user.is_admin = True
-        user.is_superuser = True
+        # user.is_superuser = True
         user.save(using=self._db)
         return user
 
@@ -35,7 +35,7 @@ class User(AbstractBaseUser):
     first_name = models.CharField(max_length=45)
     last_name = models.CharField(max_length=45)
     email = models.EmailField(max_length=45, unique = True)
-    password = models.CharField(max_length=45)
+    password = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -121,13 +121,13 @@ class Invoice(models.Model):
     event_date = models.DateField(null=True) #Needs to be able to accomadate multiple dates
 
     one_week_price = models.DecimalField(max_digits=7, decimal_places=2)
-    two_week_price = models.DecimalField(max_digits=7, decimal_places=2)
-    other_week_price = models.DecimalField(max_digits=7, decimal_places=2)
+    two_week_price = models.DecimalField(max_digits=7, decimal_places=2) #Eliminate this field, as per 3NF
+    other_week_price = models.DecimalField(max_digits=7, decimal_places=2) #Eliminate this field, as per 3NF
 
     purchases = models.DecimalField(max_digits=7, decimal_places=2)# Not sure if we need all these fields
     subtotal = models.DecimalField(max_digits=8, decimal_places=2)# but including anyway just in case
     tax = models.DecimalField(max_digits=10, decimal_places=6)# This one too
-    total_price = models.DecimalField(max_digits=8, decimal_places=2)
+    total_price = models.DecimalField(max_digits=8, decimal_places=2) #Eliminate this field, as per 3NF
 
     customer = models.ForeignKey(Renter, related_name="invoices")
     owner = models.ForeignKey(Owner, related_name="invoices")
