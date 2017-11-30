@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import Login from '../login/Login';
+import Login from '../login/Login'
+import Menu from '../Menu/Menu';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 import { apiClient } from '../../util/ApiClient';
 
@@ -21,19 +24,21 @@ class App extends Component {
            console.log(error);
        });
     }
-    
-    render() {
-        return (
-            <div className="App">
 
-            <Login/>
-            <div>
-                <button onClick={(event) => this.getSchema(event)}>Click me</button>
-            </div>
-            </div>
-            
-        );
-    }
+  render() {
+    return (
+      <div className="App">
+        <Header />
+        <Menu />
+        <Login/>
+        <div>
+            <button onClick={(event) => this.getSchema(event)}>Click me</button>
+        </div>
+        <Footer />
+      </div>
+      
+    );
+  }
 }
 
 export default App;
