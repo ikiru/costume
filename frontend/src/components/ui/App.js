@@ -22,10 +22,6 @@ class App extends Component {
        });
     }
     
-    componentWillMount() {
-        console.log('lol');
-    }
-
     render() {
         return (
             <div className="App">
