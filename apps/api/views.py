@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from rest_framework import permissions, viewsets
 from .serializers import *
+from django.contrib.auth.models import User
 
 class UserViewSet(viewsets.ModelViewSet):
     """
