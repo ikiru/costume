@@ -3,7 +3,7 @@ import './Search.css';
 
 const search = (props) => {
     return(
-        <div className=Search>
+        <div className='Search'>
 
         </div>
     )
