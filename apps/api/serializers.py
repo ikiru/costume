@@ -1,8 +1,6 @@
-from django.contrib.auth import get_user_model #Required b/c custom User model
-from models import State, Renter, Owner, Invoice, PrimaryColor, SecondaryColor, Costume, TimePeriod, Size, Show
-from rest_framework import serializers
 
-User = get_user_model()#Required b/c custom User model
+from models import *
+from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
