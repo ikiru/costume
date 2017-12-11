@@ -25,5 +25,5 @@ This is where we will start to work on our costume inventory project
    -  django-seed (https://github.com/Brobin/django-seed)
    To seed database, run 
    
-      "python manage.py seed api --number=<number>", substituting your desired number in the command
+      "python manage.py seed api --number=15", substituting your desired number in the command
 
