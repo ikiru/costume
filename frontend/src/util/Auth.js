@@ -10,6 +10,14 @@ export function InvalidCredentialsException(message) {
 }
 
 export function login(email, password) {
+<<<<<<< HEAD
+<<<<<<< HEAD
+  return axios
+    .post(URL + LOGIN, {
+      email,
+=======
+=======
+>>>>>>> upstream/master
   console.log(email);
 // If you have error -> 
 // Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:3000' is therefore not allowed access.
@@ -17,6 +25,10 @@ export function login(email, password) {
   return axios.post(
     URL + LOGIN,
     { email,
+<<<<<<< HEAD
+>>>>>>> upstream/master
+=======
+>>>>>>> upstream/master
       password
     }).then(function (response) {
         // console.log('success', response)
