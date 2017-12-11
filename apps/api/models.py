@@ -13,7 +13,7 @@ from django.contrib.auth.models import User, Group
     #     )
 
 class State(models.Model):
-    name = models.CharField(max_length=2)
+    name = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -25,7 +25,7 @@ class Renter(models.Model):
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100) #Seed with cities
     zipcode = models.CharField(max_length=10) #Seed with available zips
-    phone = models.CharField(max_length=12)
+    phone_number = models.CharField(max_length=20)
     tax_id = models.CharField(max_length=45)
     state = models.ForeignKey(State, related_name="renters") #Seed with states
     created_at = models.DateTimeField(auto_now_add=True)
@@ -39,7 +39,7 @@ class Owner(models.Model):
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100) #Seed with cities
     zipcode = models.CharField(max_length=10) #Seed with zips
-    phone = models.CharField(max_length=12)
+    phone_number = models.CharField(max_length=20)
     tax_id = models.CharField(max_length=45)
     state = models.ForeignKey(State, related_name="owners") #Seed with states
     created_at = models.DateTimeField(auto_now_add=True)
