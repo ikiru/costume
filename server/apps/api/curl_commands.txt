@@ -1,15 +1,14 @@
-curl -X POST -d "grant_type=password&username=tyler&password=passpass" -u"UpTaZqIk6uyD4jtKjWNHpCqFYaIe2oShuqZ5ZDvy:8AHE3OuGid9RVSYaKEmAQbjDyjF6zqUKMN329DgabrzoEZRxhYktZns4A7oQyh7cEDW33ktjR2NeSWMrkVYiMyifQoAMDpdtXyHRUDMqf9je3Krhfhx0vRISTFbYZeXO" http://localhost:8000/o/token/
+curl -X POST -d "grant_type=password&username=tyler&password=passpass" -u"VPNiN22wwiT15IddeP7JxMoA5PaSngc0liB6BDs8:8HqrMvF7F6bfE9m8thqOvkcYjjjRBZTGNy1gWbvIEuCrNdWDDCa8Mo2Fu6rWDHAkCgUYo7VpMgimWhMYkl1dFwXtvUdqWcZsQfkRLBgL19YSPuZncAgbsacUBLP2ouQ3" http://localhost:8000/o/token/
 {
-"access_token": "vI9NKKrVOgdJRplYzd940JAEcT8Qok",
-"token_type": "Bearer",
-"expires_in": 36000,
-"refresh_token": "wOTH4s4emEaIyHnAh3y0KM7LKXpBTf",
+"access_token": "Vr980KjiDWugWChdrMbe6jCtvD5qcd",
+"token_type": "Bearer", "expires_in": 36000,
+"refresh_token": "HGoCcTA0WXtcmr45gSN4h7Sn53GkcX",
 "scope": "read write groups"
 }
 
   # Retrieve users
-  curl -H "Authorization: Bearer vI9NKKrVOgdJRplYzd940JAEcT8Qok" http://localhost:8000/users/
-  curl -H "Authorization: Bearer vI9NKKrVOgdJRplYzd940JAEcT8Qok" http://localhost:8000/users/1/
+  curl -H "Authorization: Bearer Vr980KjiDWugWChdrMbe6jCtvD5qcd" http://localhost:8000/users/
+  curl -H "Authorization: Bearer Vr980KjiDWugWChdrMbe6jCtvD5qcd" http://localhost:8000/users/1/
 
   # Retrieve groups
   curl -H "Authorization: Bearer vI9NKKrVOgdJRplYzd940JAEcT8Qok" http://localhost:8000/groups/
