@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import classes from './Addowners.css';
-import Input from '../../../UI/Input/Input';
+import Input from '../../ui/Input/Input';
 
 class Addowners extends Component {
     
@@ -89,7 +89,7 @@ class Addowners extends Component {
         for(let key in this.state.addOwners){
             formElementsArray.push({
                 id: key,
-                config: this.state.addOwners[Key]
+                config: this.state.addOwners[key]
             });
         }
         let form = (
@@ -98,20 +98,22 @@ class Addowners extends Component {
                 {formElementsArray.map(formElement => (
                     <Input 
                     key={formElement.id}
-                    elementType={formElement.config.elementtType} 
-                    elementConfig={formElement.config.elementtConfig}
+                    elementType={formElement.config.elementType} 
+                    elementConfig={formElement.config.elementConfig}
                     value={formElement.config.value} 
                     />
                 ))}
-                <Button btnType="Success">ORDER</Button>
+                
             </form>
-        )
-    };
+        );
+    
 
-    return (
-        <div className={classes.addOwners}>
-            <h4>Enter your Owner Data</h4>
-            {form}
-        </div>
-    );
+        return (
+            <div className={classes.addOwners}>
+                <h4>Enter your Owner Data</h4>
+                {form}
+            </div>
+        );
+    }
 }
+export default Addowners;
