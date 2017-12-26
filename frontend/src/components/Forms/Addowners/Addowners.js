@@ -123,7 +123,7 @@ class Addowners extends Component {
 
         return (
             <div className={classes.addOwners}>
-                <h4>Enter your Owner Data</h4>
+                <h4>Enter Owners Data</h4>
                 {form}
             </div>
         );
