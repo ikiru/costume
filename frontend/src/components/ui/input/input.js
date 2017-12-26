@@ -1,8 +1,8 @@
 import React from 'react';
 
-import classes from '.Input.css';
+import classes from './Input.css';
 
-const input = (props) => {
+const Input = (props) => {
     let inputElement = null;
 
     switch (props.elementType){
@@ -39,7 +39,8 @@ const input = (props) => {
         <div className={classes.Input}>
             <label clasName = {classes.Label}>{props.label}</label>
             {inputElement}
-    );  </div>
+    </div>
+    ); 
 };
 
-export default input;
+export default Input;

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import classes from './Addowners.css';
-import Input from '../../../UI/Input/Input';
+import Input from '../../ui/Input/Input';
 
 class Addowners extends Component {
+    
     state = {
         addOwners:{
             name:{
@@ -39,8 +40,8 @@ class Addowners extends Component {
                 elementType:'select',
                 elementConfig:{
                     option:[
-                        {value:'AL', displayvalue:'AL'}
-                        {value:'KS', displayvalue:'KS'}
+                        {value:'AL', displayvalue:'AL'},
+                        {value:'KS', displayvalue:'KS'},
                         {value:'TX', displayvalue:'TX'}
                     ]
                 },
@@ -80,14 +81,39 @@ class Addowners extends Component {
 
         }
 
-        loading:false
+        // loading:false
     }
 
     render (){
+        const formElementsArray = [];
+        for(let key in this.state.addOwners){
+            formElementsArray.push({
+                id: key,
+                config: this.state.addOwners[key]
+            });
+        }
         let form = (
             <form>
                 <Input elementtType="..." element Config="..." value="..." />
+                {formElementsArray.map(formElement => (
+                    <Input 
+                    key={formElement.id}
+                    elementType={formElement.config.elementType} 
+                    elementConfig={formElement.config.elementConfig}
+                    value={formElement.config.value} 
+                    />
+                ))}
+                
             </form>
-        )
+        );
+    
+
+        return (
+            <div className={classes.addOwners}>
+                <h4>Enter your Owner Data</h4>
+                {form}
+            </div>
+        );
     }
 }
+export default Addowners;
