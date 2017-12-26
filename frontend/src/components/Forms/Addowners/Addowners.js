@@ -92,7 +92,7 @@ class Addowners extends Component {
             ...updatedAddOwners[inputIdentifier]
         };
         updatedFormElement.value = event.target.value;
-        updatedAddOweners[inputIdentifier] = updatedFormElement;
+        updatedAddOwners[inputIdentifier] = updatedFormElement;
         this.setState({orderForm: updatedAddOwners});
     }
 
