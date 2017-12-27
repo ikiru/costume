@@ -7,75 +7,75 @@ class Addowners extends Component {
     
     state = {
         addOwners:{
-            name:{
-                elementType:'input',
-                elementConfig:{
-                    type:'text',
-                    placeholder: 'Business Name'
+                name:{
+                    elementType:'input',
+                    elementConfig:{
+                        type:'text',
+                        placeholder: 'Business Name'
+                    },
+                    value:''
+
                 },
-                value:''
+                address:{
+                    elementType:'input',
+                    elementConfig:{
+                        type:'text',
+                        placeholder: 'Business Address'
+                    },
+                    value:''
 
-            },
-            address:{
-                elementType:'input',
-                elementConfig:{
-                    type:'text',
-                    placeholder: 'Business Address'
                 },
-                value:''
 
-            },
+                city:{
+                    elementType:'input',
+                    elementConfig:{
+                        type:'text',
+                        placeholder: 'City'
+                    },
+                    value:''
 
-            city:{
-                elementType:'input',
-                elementConfig:{
-                    type:'text',
-                    placeholder: 'City'
                 },
-                value:''
 
-            },
+                state:{
+                    elementType:'select',
+                    elementConfig:{
+                        options:[
+                            {value:'AL', displayValue:'AL'},
+                            {value:'KS', displayValue:'KS'},
+                            {value:'TX', displayValue:'TX'}
+                        ]
+                    },
+                    value:''
 
-            state:{
-                elementType:'select',
-                elementConfig:{
-                    option:[
-                        {value:'AL', displayvalue:'AL'},
-                        {value:'KS', displayvalue:'KS'},
-                        {value:'TX', displayvalue:'TX'}
-                    ]
                 },
-                value:''
 
-            },
+                zipcode:{
+                    elementType:'input',
+                    elementConfig:{
+                        type:'text',
+                        placeholder: 'Zip Code'
+                    },
+                    value:''
 
-            zipcode:{
-                elementType:'input',
-                elementConfig:{
-                    type:'text',
-                    placeholder: 'Zip Code'
                 },
-                value:''
 
-            },
+                phone_number:{
+                    elementType:'input',
+                    elementConfig:{
+                        type:'text',
+                        placeholder: 'Daytime Phone Number'
+                    },
+                    value:''
 
-            phone_number:{
-                elementType:'input',
-                elementConfig:{
-                    type:'text',
-                    placeholder: 'Daytime Phone Number'
                 },
-                value:''
 
-            },
-
-            email:{
-                elementType:'email',
-                elementConfig:{
-                    type:'email',
-                    placeholder: 'Email'
-                },
-                value:''
+                email:{
+                    elementType:'email',
+                    elementConfig:{
+                        type:'email',
+                        placeholder: 'Email'
+                    },
+                    value:''
 
             },
 
@@ -105,8 +105,7 @@ class Addowners extends Component {
             });
         }
         let form = (
-            <form>
-                <Input elementtType="..." element Config="..." value="..." />
+            <form>              
                 {formElementsArray.map(formElement => (
                     <Input 
                     key={formElement.id}
