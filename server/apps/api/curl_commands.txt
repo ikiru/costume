@@ -1,18 +1,20 @@
-curl -X POST -d "grant_type=password&username=tyler&password=passpass" -u"RoT8XlijfGYuBvzCc6QYFF39l733r9O7ORUM3GXq:7xhBuJ34BsXMqGyRoHy8u15EeAWbwuKBo4yLC5ANrHuUoJ7fCqnYetrgsEpS480t8JEldJterG74nUl4nHG15fD7Wh34pPTxcQ7Po32GxpkShrBIcGAUmzKJAFNSgwLq" http://localhost:8000/o/token/
-{"access_token": "85Z9jVskN9ow4LIWoSI1yTFL8hGp8P",
-  "token_type": "Bearer", "expires_in": 36000,
-  "refresh_token": "56qZcbnxKtYZYvCAWGr1ysbnhPRF2S",
-  "scope": "read write groups"}
+curl -X POST -d "grant_type=password&username=tyler&password=passpass" -u"VPNiN22wwiT15IddeP7JxMoA5PaSngc0liB6BDs8:8HqrMvF7F6bfE9m8thqOvkcYjjjRBZTGNy1gWbvIEuCrNdWDDCa8Mo2Fu6rWDHAkCgUYo7VpMgimWhMYkl1dFwXtvUdqWcZsQfkRLBgL19YSPuZncAgbsacUBLP2ouQ3" http://localhost:8000/o/token/
+{
+"access_token": "Vr980KjiDWugWChdrMbe6jCtvD5qcd",
+"token_type": "Bearer", "expires_in": 36000,
+"refresh_token": "HGoCcTA0WXtcmr45gSN4h7Sn53GkcX",
+"scope": "read write groups"
+}
 
   # Retrieve users
-  curl -H "Authorization: Bearer 85Z9jVskN9ow4LIWoSI1yTFL8hGp8P" http://localhost:8000/users/
-  curl -H "Authorization: Bearer 85Z9jVskN9ow4LIWoSI1yTFL8hGp8P" http://localhost:8000/users/1/
+  curl -H "Authorization: Bearer Vr980KjiDWugWChdrMbe6jCtvD5qcd" http://localhost:8000/users/
+  curl -H "Authorization: Bearer Vr980KjiDWugWChdrMbe6jCtvD5qcd" http://localhost:8000/users/1/
 
   # Retrieve groups
-  curl -H "Authorization: Bearer 85Z9jVskN9ow4LIWoSI1yTFL8hGp8P" http://localhost:8000/groups/
+  curl -H "Authorization: Bearer vI9NKKrVOgdJRplYzd940JAEcT8Qok" http://localhost:8000/groups/
 
   # Insert a new user
-  curl -H "Authorization: Bearer 85Z9jVskN9ow4LIWoSI1yTFL8hGp8P" -X POST -d"username=foo&password=bar" http://localhost:8000/users/
+  curl -H "Authorization: Bearer vI9NKKrVOgdJRplYzd940JAEcT8Qok" -X POST -d"username=foo&password=bar" http://localhost:8000/users/
 
   # Let’s try to access resources using a token with a restricted scope adding a scope parameter to the token request
   curl -X POST -d "grant_type=password&username=tyler&password=passpass&scope=read" -u"RoT8XlijfGYuBvzCc6QYFF39l733r9O7ORUM3GXq:7xhBuJ34BsXMqGyRoHy8u15EeAWbwuKBo4yLC5ANrHuUoJ7fCqnYetrgsEpS480t8JEldJterG74nUl4nHG15fD7Wh34pPTxcQ7Po32GxpkShrBIcGAUmzKJAFNSgwLq" http://localhost:8000/o/token/

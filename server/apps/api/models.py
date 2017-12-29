@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User, Group
 
+#Don't need a User model here, as we're inheriting Django's default User model
+
     # def __str__(self):
     #     string_output = " ID: {} Email: {} Password: {} Admin: {}"
     #     return string_output.format(
@@ -13,7 +15,7 @@ from django.contrib.auth.models import User, Group
     #     )
 
 class State(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -22,11 +24,12 @@ class State(models.Model):
 
 class Renter(models.Model):
     name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=45)
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100) #Seed with cities
     zipcode = models.CharField(max_length=10) #Seed with available zips
-    phone_number = models.CharField(max_length=20)
-    tax_id = models.CharField(max_length=45)
+    phone = models.CharField(max_length=20)
+    tax_free_id = models.CharField(max_length=45)
     state = models.ForeignKey(State, related_name="renters") #Seed with states
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -36,11 +39,12 @@ class Renter(models.Model):
 
 class Owner(models.Model):
     name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=45)
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100) #Seed with cities
     zipcode = models.CharField(max_length=10) #Seed with zips
-    phone_number = models.CharField(max_length=20)
-    tax_id = models.CharField(max_length=45)
+    phone = models.CharField(max_length=20)
+    tax_free_id = models.CharField(max_length=45)
     state = models.ForeignKey(State, related_name="owners") #Seed with states
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -52,10 +56,6 @@ class Invoice(models.Model):
     check_out = models.DateField(null=True)
     check_in = models.DateField(null=True)
     event_date = models.DateField(null=True) #Needs to be able to accomadate multiple dates
-
-    one_week_price = models.DecimalField(max_digits=7, decimal_places=2)
-    two_week_price = models.DecimalField(max_digits=7, decimal_places=2) #Eliminate this field, as per 3NF
-    other_week_price = models.DecimalField(max_digits=7, decimal_places=2) #Eliminate this field, as per 3NF
 
     purchases = models.DecimalField(max_digits=7, decimal_places=2)# Not sure if we need all these fields
     subtotal = models.DecimalField(max_digits=8, decimal_places=2)# but including anyway just in case
@@ -136,3 +136,6 @@ class Costume(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.description
