@@ -55,10 +55,6 @@ class Invoice(models.Model):
     check_in = models.DateField(null=True)
     event_date = models.DateField(null=True) #Needs to be able to accomadate multiple dates
 
-    one_week_price = models.DecimalField(max_digits=7, decimal_places=2)
-    two_week_price = models.DecimalField(max_digits=7, decimal_places=2) #Eliminate this field, as per 3NF
-    other_week_price = models.DecimalField(max_digits=7, decimal_places=2) #Eliminate this field, as per 3NF
-
     purchases = models.DecimalField(max_digits=7, decimal_places=2)# Not sure if we need all these fields
     subtotal = models.DecimalField(max_digits=8, decimal_places=2)# but including anyway just in case
     tax = models.DecimalField(max_digits=10, decimal_places=6)# This one too
