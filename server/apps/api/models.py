@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User, Group
 
+#Don't need a User model here, as we're inheriting Django's default User model
+
     # def __str__(self):
     #     string_output = " ID: {} Email: {} Password: {} Admin: {}"
     #     return string_output.format(
