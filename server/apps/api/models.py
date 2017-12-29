@@ -22,11 +22,12 @@ class State(models.Model):
 
 class Renter(models.Model):
     name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=45)
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100) #Seed with cities
     zipcode = models.CharField(max_length=10) #Seed with available zips
     phone = models.CharField(max_length=20)
-    tax_id = models.CharField(max_length=45)
+    tax_free_id = models.CharField(max_length=45)
     state = models.ForeignKey(State, related_name="renters") #Seed with states
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -36,11 +37,12 @@ class Renter(models.Model):
 
 class Owner(models.Model):
     name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=45)
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100) #Seed with cities
     zipcode = models.CharField(max_length=10) #Seed with zips
     phone = models.CharField(max_length=20)
-    tax_id = models.CharField(max_length=45)
+    tax_free_id = models.CharField(max_length=45)
     state = models.ForeignKey(State, related_name="owners") #Seed with states
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
