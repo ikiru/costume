@@ -10,7 +10,7 @@ class AddPrimaryColor extends Component {
             color:{
                 elementType:'select',
                 elementConfig:{
-                    option:[
+                    options:[
                         {value:'Blue', displayvalue:'Blue'},
                         {value:'Yellow', displayvalue:'Yellow'},
                         {value:'Purple', displayvalue:'Purple'}
