@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-import classes from './Addprimarycolor.css';
+import classes from './Addsecondarycolor.css';
 import Input from '../../ui/Input/Input';
 
-class AddPrimaryColors extends Component {
+class AddSecondaryColors extends Component {
     
     state = {
-        addPrimaryColors:{
+        addSecondaryColors:{
             color:{
                 elementType:'select',
                 elementConfig:{
@@ -24,23 +24,23 @@ class AddPrimaryColors extends Component {
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
-        const updatedAddPrimaryColors = {
-            ...this.state.addPrimaryColors
+        const updatedAddSecondaryColors = {
+            ...this.state.addSecondaryColors
         };
         const updatedFormElement = { 
-            ...updatedAddPrimaryColors[inputIdentifier]
+            ...updatedAddSecondaryColors[inputIdentifier]
         };
         updatedFormElement.value = event.target.value;
-        updatedAddPrimaryColors[inputIdentifier] = updatedFormElement;
-        this.setState({orderForm: updatedAddPrimaryColors});
+        updatedAddSecondaryColors[inputIdentifier] = updatedFormElement;
+        this.setState({orderForm: updatedAddSecondaryColors});
     }
 
     render (){
         const formElementsArray = [];
-        for(let key in this.state.addPrimaryColors){
+        for(let key in this.state.addSecondaryColors){
             formElementsArray.push({
                 id: key,
-                config: this.state.addPrimaryColors[key]
+                config: this.state.addSecondaryColors[key]
             });
         }
         let form = (
@@ -60,11 +60,11 @@ class AddPrimaryColors extends Component {
     
 
         return (
-            <div className={classes.addPrimaryColors}>
-                <h4>Enter Primary Color</h4>
+            <div className={classes.addSecondaryColors}>
+                <h4>Enter Secondary Color</h4>
                 {form}
             </div>
         );
     }
 }
-export default AddPrimaryColors;
+export default AddSecondaryColors;

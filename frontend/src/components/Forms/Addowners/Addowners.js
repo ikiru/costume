@@ -86,14 +86,14 @@ class Addowners extends Component {
 
     inputChangedHandler = (event, inputIdentifier) => {
         const updatedAddOwners = {
-            ...this.state.addOwner
+            ...this.state.addOwners
         };
         const updatedFormElement = { 
             ...updatedAddOwners[inputIdentifier]
         };
         updatedFormElement.value = event.target.value;
         updatedAddOwners[inputIdentifier] = updatedFormElement;
-        this.setState({orderForm: updatedAddOwners});
+        this.setState({addOwners: updatedAddOwners});
     }
 
     render (){
