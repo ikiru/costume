@@ -39,7 +39,7 @@ class AddRenters extends Component {
             state:{
                 elementType:'select',
                 elementConfig:{
-                    option:[
+                    options:[
                         {value:'AL', displayvalue:'AL'},
                         {value:'KS', displayvalue:'KS'},
                         {value:'TX', displayvalue:'TX'}
