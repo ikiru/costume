@@ -9,7 +9,9 @@ import './App.css';
 // Forms
 import Addowners from '../components/Forms/Addowners/Addowners';
 import Addrenters from '../components/Forms/Addrenters/Addrenters';
-import Addprimarycolor from '../components/Forms/Addprimarycolor/Addprimarycolor';
+import Addprimarycolors from '../components/Forms/Addprimarycolor/Addprimarycolor';
+import Addsecondarycolors from '../components/Forms/Addsecondarycolor/Addsecondarycolor';
+
 
 class App extends Component {
   render() {
@@ -18,7 +20,8 @@ class App extends Component {
       <div className="App">
         <Addowners />
         <Addrenters />
-        <Addprimarycolor />
+        <Addprimarycolors />
+        <Addsecondarycolors />
       </div>
       
     );

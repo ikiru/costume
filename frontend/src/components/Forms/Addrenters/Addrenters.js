@@ -40,9 +40,9 @@ class AddRenters extends Component {
                 elementType:'select',
                 elementConfig:{
                     options:[
-                        {value:'AL', displayvalue:'AL'},
-                        {value:'KS', displayvalue:'KS'},
-                        {value:'TX', displayvalue:'TX'}
+                        {value:'AL', displayValue:'AL'},
+                        {value:'KS', displayValue:'KS'},
+                        {value:'TX', displayValue:'TX'}
                     ]
                 },
                 value:''
@@ -86,7 +86,7 @@ class AddRenters extends Component {
 
     inputChangedHandler = (event, inputIdentifier) => {
         const updatedAddRenters = {
-            ...this.state.addOwner
+            ...this.state.addRenters
         };
         const updatedFormElement = { 
             ...updatedAddRenters[inputIdentifier]
