@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-import classes from './Addowners.css';
-import Input from '../../ui/Input/Input';
+import Input from '../../../ui/input/input'
 
 class Addowners extends Component {
     
@@ -121,7 +120,7 @@ class Addowners extends Component {
     
 
         return (
-            <div className={classes.addOwners}>
+            <div>
                 <h4>Enter Owners Data</h4>
                 {form}
             </div>

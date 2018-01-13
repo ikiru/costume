@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-import classes from './Addsecondarycolor.css';
-import Input from '../../ui/Input/Input';
+import Input from '../../../ui/input/input';
 
 class AddSecondaryColors extends Component {
     
@@ -60,7 +59,7 @@ class AddSecondaryColors extends Component {
     
 
         return (
-            <div className={classes.addSecondaryColors}>
+            <div>
                 <h4>Enter Secondary Color</h4>
                 {form}
             </div>

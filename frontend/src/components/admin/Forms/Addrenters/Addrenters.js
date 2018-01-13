@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-import classes from './Addrenters.css';
-import Input from '../../ui/Input/Input';
+import Input from '../../../ui/input/input';
 
 class AddRenters extends Component {
     
@@ -122,7 +121,7 @@ class AddRenters extends Component {
     
 
         return (
-            <div className={classes.addRenters}>
+            <div>
                 <h4>Enter Renters Data</h4>
                 {form}
             </div>
