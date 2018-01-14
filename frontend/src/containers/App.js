@@ -7,10 +7,10 @@ import './App.css';
 // import Footer from '../components/Footer/Footer';
 
 // Forms
-import Addowners from '../components/Forms/Addowners/Addowners';
-import Addrenters from '../components/Forms/Addrenters/Addrenters';
-import Addprimarycolors from '../components/Forms/Addprimarycolor/Addprimarycolor';
-import Addsecondarycolors from '../components/Forms/Addsecondarycolor/Addsecondarycolor';
+import Addowners from '../components/admin/forms/addowners/addOwners'
+import Addrenters from '../components/admin/forms/addrenters/addRenters'
+import AddPrimaryColors from '../components/admin/forms/addprimarycolor/addPrimarycolor'
+import AddSecondaryColors from '../components/admin/forms/addsecondarycolor/addSecondarycolor'
 
 
 class App extends Component {
@@ -20,8 +20,8 @@ class App extends Component {
       <div className="App">
         <Addowners />
         <Addrenters />
-        <Addprimarycolors />
-        <Addsecondarycolors />
+        <AddPrimaryColors />
+        <AddSecondaryColors />
       </div>
       
     );
